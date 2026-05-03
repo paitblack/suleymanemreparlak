@@ -3,6 +3,8 @@ import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'dart:async';
+import 'package:my_personal_website/ui/info.dart';
+import 'package:my_personal_website/features/social_contact.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -44,7 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             height: size.height,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/bg2.png'),
+                image: AssetImage('assets/images/bg.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -181,12 +183,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         children: [
           _medievalButton(
             text: "I seek the Master of this Keep",
-            onTap: () => debugPrint("Seeking Architect..."),
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ArchitectScreen())),
           ),
           const SizedBox(height: 15),
           _medievalButton(
             text: "I carry a parchment for thee",
-            onTap: () => debugPrint("Opening Message Box..."),
+            onTap: SocialContactStrip.sendRavenEmail,
           ),
         ],
       ),
