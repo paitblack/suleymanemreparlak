@@ -210,6 +210,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ),
           child: Text(
             text,
+            textAlign: TextAlign.center,
             style: GoogleFonts.almendra(
               fontSize: 22,
               color: Colors.white,
