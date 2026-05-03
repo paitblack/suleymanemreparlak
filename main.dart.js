@@ -68726,7 +68726,7 @@ A.abg.prototype={
 $0(){return this.a.d=!1},
 $S:0}
 A.F2.prototype={
-M(a){return new A.v4(B.Ol,"deneme",A.afK(B.a1,null,A.atF(A.aM(a).ok),null),!1,null)}}
+M(a){return new A.v4(B.Ol,"S\xfcleyman Emre Parlak",A.afK(B.a1,null,A.atF(A.aM(a).ok),null),!1,null)}}
 A.lq.prototype={
 ag(){return new A.IL(null,null)}}
 A.IL.prototype={
@@ -68876,7 +68876,7 @@ M(a){var s,r,q=this,p=null,o="Halt, traveler!\nWhat seek ye in this\ndigital rea
 m*=0.4
 s=A.c([new A.e7(30,B.bO,A.ac(B.c.aa(229.5),B.f.n()>>>16&255,B.f.n()>>>8&255,B.f.n()&255),B.k,80)],t.sq)
 r=t.E
-l=A.TQ(A.ja(B.P,A.c([A.vT(l*0.15,A.ae8(A.dP(p,p,B.t,p,p,new A.c1(p,p,p,A.rN(new A.aP(m,100)),s,p,B.W),p,180,p,p,p,p,m),B.a_,B.dg,i),p,p,p,p,p,p),new A.h3(A.a3A(new A.vb("assets/models/welcome.glb","Medieval Knight",!1,!0,0.6,!0,B.z,p),l,p),p)],r),B.bG),1)
+l=A.TQ(A.ja(B.P,A.c([A.vT(l*0.15,A.ae8(A.dP(p,p,B.t,p,p,new A.c1(p,p,p,A.rN(new A.aP(m,100)),s,p,B.W),p,180,p,p,p,p,m),B.a_,B.dg,i),p,p,p,p,p,p),new A.h3(A.a3A(new A.vb("assets/assets/models/welcome.glb","Medieval Knight",!1,!0,0.6,!0,B.z,p),l,p),p)],r),B.bG),1)
 if(q.d){m=A.rh().$5$color$fontSize$fontWeight$height$shadows(B.o,42,B.aP,1.3,A.c([new A.dp(B.f,new A.l(-1.5,-1.5),0),new A.dp(B.f,new A.l(1.5,-1.5),0),new A.dp(B.f,new A.l(1.5,1.5),0),new A.dp(B.f,new A.l(-1.5,1.5),0),new A.dp(A.ac(204,B.f.n()>>>16&255,B.f.n()>>>8&255,B.f.n()&255),B.FY,20)],t.kO))
 i=B.h.aa(5e4*new A.h8(o).gD(0))
 m=A.oq(new A.rw(A.c([new A.y0(B.kJ,o,B.aA,p,new A.aK(i),new A.h8(o))],t.u6),new A.abZ(q),!1,p),p,B.c9,!0,m,p,p,B.aB)}else m=B.dU
