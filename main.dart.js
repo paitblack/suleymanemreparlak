@@ -68726,7 +68726,7 @@ A.abg.prototype={
 $0(){return this.a.d=!1},
 $S:0}
 A.F2.prototype={
-M(a){return new A.v4(B.Ol,"S\xfcleyman Emre Parlak",A.afK(B.a1,null,A.atF(A.aM(a).ok),null),!1,null)}}
+M(a){return new A.v4(B.Ol,"deneme",A.afK(B.a1,null,A.atF(A.aM(a).ok),null),!1,null)}}
 A.lq.prototype={
 ag(){return new A.IL(null,null)}}
 A.IL.prototype={
