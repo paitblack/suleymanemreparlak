@@ -101,7 +101,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         height: size.height,
                         child: ModelViewer(
                           backgroundColor: Colors.transparent,
-                          src: 'assets/models/welcome.glb',
+                          src: 'assets/assets/models/welcome.glb',
                           alt: "Medieval Knight",
                           autoPlay: true,
                           cameraControls: false,
