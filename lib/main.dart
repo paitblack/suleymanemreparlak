@@ -13,7 +13,7 @@ class MedievalWebsite extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'deneme',
+      title: 'Süleyman Emre Parlak',
       theme: ThemeData(
         brightness: Brightness.dark,
         textTheme: GoogleFonts.almendraTextTheme(Theme.of(context).textTheme),
