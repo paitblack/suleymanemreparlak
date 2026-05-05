@@ -54,21 +54,21 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
               controller: _scrollController,
               physics: const BouncingScrollPhysics(),
               slivers: [
-                _buildSliverAppBar(size),
+                _buildSliverAppBar(size, isDesktop),
                 SliverPadding(
-                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 40),
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: isDesktop ? 40 : 20),
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
-                      _buildHeroSection(),
+                      _buildHeroSection(isDesktop),
                       _buildLinksSection(isDesktop),
                       const _OrnateDivider(),
-                      _buildGuildRecordsSection(),
+                      _buildGuildRecordsSection(isDesktop),
                       const _OrnateDivider(),
-                      _buildArsenalSection(isDesktop),
+                      _buildArsenalSection(isDesktop, size),
                       const _OrnateDivider(),
-                      _buildRunesSection(isDesktop),
+                      _buildRunesSection(isDesktop, size),
                       const _OrnateDivider(),
-                      _buildApprenticeshipSection(),
+                      _buildApprenticeshipSection(isDesktop),
                       const _OrnateDivider(),
                       _buildChroniclesSection(isDesktop),
                       const _OrnateDivider(),
@@ -78,7 +78,7 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
                 ),
               ],
             ),
-            _buildReturnButton(),
+            _buildReturnButton(isDesktop),
           ],
         ),
       ),
@@ -89,7 +89,7 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(height: 40),
+        SizedBox(height: isDesktop ? 40 : 20),
         const SocialContactStrip(),
       ],
     );
@@ -106,10 +106,10 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
     );
   }
 
-  Widget _buildReturnButton() {
+  Widget _buildReturnButton(bool isDesktop) {
     return Positioned(
-      top: 40,
-      left: 40,
+      top: isDesktop ? 40 : 50,
+      left: isDesktop ? 40 : 10,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -117,18 +117,18 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
           hoverColor: const Color(0xFFD4AF37).withOpacity(0.1),
           borderRadius: BorderRadius.circular(8),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(isDesktop ? 8.0 : 4.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.arrow_back_ios, color: Color(0xFFD4AF37), size: 16),
-                const SizedBox(width: 8),
+                Icon(Icons.arrow_back_ios, color: const Color(0xFFD4AF37), size: isDesktop ? 16 : 14),
+                SizedBox(width: isDesktop ? 8 : 4),
                 Text(
                   "Return",
                   style: GoogleFonts.almendra(
                     color: const Color(0xFFD4AF37),
-                    fontSize: 20,
-                    letterSpacing: 2,
+                    fontSize: isDesktop ? 20 : 16,
+                    letterSpacing: isDesktop ? 2 : 1,
                   ),
                 ),
               ],
@@ -139,9 +139,9 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
     );
   }
 
-  Widget _buildSliverAppBar(Size size) {
+  Widget _buildSliverAppBar(Size size, bool isDesktop) {
     return SliverAppBar(
-      expandedHeight: size.height * 0.4,
+      expandedHeight: size.height * (isDesktop ? 0.4 : 0.3),
       backgroundColor: Colors.transparent,
       elevation: 0,
       pinned: true,
@@ -153,7 +153,7 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
           style: GoogleFonts.cinzel(
             color: const Color(0xFFD4AF37),
             fontWeight: FontWeight.bold,
-            fontSize: 28,
+            fontSize: isDesktop ? 28 : 18,
             shadows: [
               Shadow(color: Colors.black.withOpacity(0.9), blurRadius: 10, offset: const Offset(2, 2)),
             ],
@@ -175,16 +175,16 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
     );
   }
 
-  Widget _buildHeroSection() {
+  Widget _buildHeroSection(bool isDesktop) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          width: 120,
-          height: 120,
+          width: isDesktop ? 120 : 90,
+          height: isDesktop ? 120 : 90,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: const Color(0xFFD4AF37), width: 3),
+            border: Border.all(color: const Color(0xFFD4AF37), width: isDesktop ? 3 : 2),
             boxShadow: [
               BoxShadow(color: const Color(0xFFD4AF37).withOpacity(0.2), blurRadius: 30, spreadRadius: 5),
             ],
@@ -194,99 +194,104 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
             ),
           ),
         ),
-        const SizedBox(height: 40),
+        SizedBox(height: isDesktop ? 40 : 25),
         Text(
           "I forge realms from logic and light.",
           textAlign: TextAlign.center,
           style: GoogleFonts.cinzel(
-            fontSize: 32,
+            fontSize: isDesktop ? 32 : 22,
             color: Colors.white,
             fontWeight: FontWeight.w600,
             letterSpacing: 1.5,
           ),
         ),
-        const SizedBox(height: 30),
+        SizedBox(height: isDesktop ? 30 : 20),
         Text(
           "A fourth-year Computer Engineering student in Turkey with a strong passion for computer science and a deep enthusiasm for Artifcial Intelligence and its applications. Dedicated to exploring AI-driven solutions, machine learning, and data science, with a keen interest in developing innovative and effcient technologies.",
           textAlign: TextAlign.center,
           style: GoogleFonts.almendra(
-            fontSize: 20,
+            fontSize: isDesktop ? 20 : 16,
             color: Colors.white70,
-            height: 1.8,
+            height: isDesktop ? 1.8 : 1.5,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildArsenalSection(bool isDesktop) {
+  Widget _buildArsenalSection(bool isDesktop, Size size) {
+    final double spacing = isDesktop ? 20 : 10;
+    final double itemWidth = isDesktop ? 300 : (size.width - 40 - (spacing * 2) - 1) / 3;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const _SectionTitle(title: "Arsenals"),
-        const SizedBox(height: 40),
+        _SectionTitle(title: "Arsenals", isDesktop: isDesktop),
+        SizedBox(height: isDesktop ? 40 : 25),
         Wrap(
-          spacing: 20,
-          runSpacing: 20,
+          spacing: spacing,
+          runSpacing: spacing,
           alignment: WrapAlignment.center,
           children: [
-            const _SkillRune(name: "Python", mastery: 1),
-            const _SkillRune(name: "Java", mastery: 1),
-            const _SkillRune(name: "Flutter & Dart", mastery: 1),
-            const _SkillRune(name: "PostgreSQL", mastery: 1),
-            const _SkillRune(name: "MySQL", mastery: 1),
-            const _SkillRune(name: "Firebase", mastery: 1),
-            const _SkillRune(name: "Vector Databases(Qdrant, Faiss)", mastery: 1),
-            const _SkillRune(name: "NestJS", mastery: 1),
-            const _SkillRune(name: "PrismaORM", mastery: 1),
-            const _SkillRune(name: "TensorFlow", mastery: 1),
-            const _SkillRune(name: "Scikit-Learn", mastery: 1),
-            const _SkillRune(name: "Pandas", mastery: 1),
-            const _SkillRune(name: "NumPy", mastery: 1),
-            const _SkillRune(name: "Bs4", mastery: 1),
-            const _SkillRune(name: "Sellenium", mastery: 1),
-            const _SkillRune(name: "FastAPI", mastery: 1),
-            const _SkillRune(name: "Flask", mastery: 1),
-            const _SkillRune(name: "Rest API", mastery: 1),
-            const _SkillRune(name: "Docker", mastery: 1),
-            const _SkillRune(name: "Google Developer Console", mastery: 1),
-            const _SkillRune(name: "Git & GitHub", mastery: 1),
-            const _SkillRune(name: "Text-to-Speech", mastery: 1),
-            const _SkillRune(name: "Speech-to-Text", mastery: 1),
-            const _SkillRune(name: "Asterisk", mastery: 1),
-
+            _SkillRune(name: "Python", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Java", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Flutter & Dart", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "PostgreSQL", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "MySQL", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Firebase", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Vector Databases\n(Qdrant, Faiss)", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "NestJS", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "PrismaORM", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "TensorFlow", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Scikit-Learn", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Pandas", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "NumPy", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Bs4", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Sellenium", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "FastAPI", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Flask", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Rest API", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Docker", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Google Developer\nConsole", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Git & GitHub", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Text-to-Speech", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Speech-to-Text", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Asterisk", mastery: 1, isDesktop: isDesktop, width: itemWidth),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildRunesSection(bool isDesktop) {
+  Widget _buildRunesSection(bool isDesktop, Size size) {
+    final double spacing = isDesktop ? 20 : 10;
+    final double itemWidth = isDesktop ? 300 : (size.width - 40 - (spacing * 2) - 1) / 3;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const _SectionTitle(title: "Runes"),
-        const SizedBox(height: 40),
+        _SectionTitle(title: "Runes", isDesktop: isDesktop),
+        SizedBox(height: isDesktop ? 40 : 25),
         Wrap(
-          spacing: 20,
-          runSpacing: 20,
+          spacing: spacing,
+          runSpacing: spacing,
           alignment: WrapAlignment.center,
           children: [
-            const _SkillRune(name: "Data Preprocessing", mastery: 1),
-            const _SkillRune(name: "Data Visualization(Matplotlib)", mastery: 1),
-            const _SkillRune(name: "Deep Learning", mastery: 1),
-            const _SkillRune(name: "Machine Learning", mastery: 1),
-            const _SkillRune(name: "Natural Language Processing", mastery: 1),
-            const _SkillRune(name: "Retrieval-Augmented Generation (RAG)", mastery: 1),
-            const _SkillRune(name: "Large Language Models", mastery: 1),
-            const _SkillRune(name: "AI Agents", mastery: 1),
-            const _SkillRune(name: "Database Management Systems", mastery: 1),
-            const _SkillRune(name: "Regular Expressions", mastery: 1),
-            const _SkillRune(name: "Web Scraping/Parsing", mastery: 1),
-            const _SkillRune(name: "Object Oriented Programming", mastery: 1),
-            const _SkillRune(name: "Data Structures and Algorithms", mastery: 1),
-            const _SkillRune(name: "Mobile and Desktop App Development", mastery: 1),
-            const _SkillRune(name: "End-to-End Development", mastery: 1),
+            _SkillRune(name: "Data\nPreprocessing", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Data Visualization\n(Matplotlib)", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Deep\nLearning", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Machine\nLearning", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Natural Language\nProcessing", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "RAG\nGeneration", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Large Language\nModels", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "AI\nAgents", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Database Mng\nSystems", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Regular\nExpressions", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Web Scraping\nParsing", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Object Oriented\nProgramming", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Data Struct & \nAlgorithms", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "Mobile & Desktop\nApp Dev", mastery: 1, isDesktop: isDesktop, width: itemWidth),
+            _SkillRune(name: "End-to-End\nDevelopment", mastery: 1, isDesktop: isDesktop, width: itemWidth),
           ],
         ),
       ],
@@ -297,8 +302,8 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionTitle(title: "The Grand Chronicles"),
-        const SizedBox(height: 40),
+        _SectionTitle(title: "The Grand Chronicles", isDesktop: isDesktop),
+        SizedBox(height: isDesktop ? 40 : 25),
         _ProjectTome(
           title: "Tome I: BitSafe AI (TÜBİTAK 2209-A)",
           role: "Machine Learning and FastAPI Developer",
@@ -307,7 +312,7 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
                           \n◦ Additionally designed and deployed an effcient FastAPI service to serve the model for low-latency inference and scalable integration with the system.""",
           isDesktop: isDesktop,
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: isDesktop ? 20 : 15),
         _ProjectTome(
           title: "Tome II: Votel (Senior Design Project)",
           role: "Full Stack Developer and Architect",
@@ -318,7 +323,7 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
                           \n◦ Finally, this highly scalable ecosystem is complemented by a cross-platform Flutter mobile application for on-the-go accessibility, with the entire architecture fully containerized via Docker for reliable deployment.""",
           isDesktop: isDesktop,
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: isDesktop ? 20 : 15),
         _ProjectTome(
           title: "Tome III: Layla - AI Based Mail Assistant",
           role: "Full Stack Developer and Architect",
@@ -327,7 +332,7 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
                           \n◦ Demonstrates skills in mobile development, NLP, and API integration.""",
           isDesktop: isDesktop,
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: isDesktop ? 20 : 15),
         _ProjectTome(
           title: "Tome IV: NeuroLoop",
           role: "Full Stack Developer and Architect",
@@ -335,7 +340,7 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
                           \n◦ Implemented a Gemini-powered RAG system for natural language Q&A, and automated quiz generation with categorized question storage for effcient retrieval.""",
           isDesktop: isDesktop,
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: isDesktop ? 20 : 15),
         _ProjectTome(
           title: "Tome V: Travelogue",
           role: "Co-Contributor and Java Android Developer",
@@ -343,21 +348,21 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
                           \n◦ Built and managed core features including trip journaling (add/edit/view travels), user authentication, settings, and travel detail modules, while contributing to UI components and overall application logic using Java and Android development principles.""",
           isDesktop: isDesktop,
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: isDesktop ? 20 : 15),
         _ProjectTome(
           title: "Tome VI: DejaView",
           role: "Co-Contributor and Machine Learning Developer",
           description: """◦ Clustered Turkish historical texts using SBERT, TF-IDF, and BERTurk with algorithms like KMeans, GMM, and OPTICS; benchmarked clustering performance.""",
           isDesktop: isDesktop,
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: isDesktop ? 20 : 15),
         _ProjectTome(
           title: "Tome VII: AI Car Game",
           role: "Full Stack Python Developer",
           description: """◦  Developed a car game using Pygame, and implemented AI agents trained with Reinforcement Learning(DQN) and rule-based algorithms.""",
           isDesktop: isDesktop,
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: isDesktop ? 20 : 15),
         _ProjectTome(
           title: "Tome VIII: Smart Path Finder",
           role: "Full Stack Developer",
@@ -368,42 +373,45 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
     );
   }
 
-  Widget _buildGuildRecordsSection() {
+  Widget _buildGuildRecordsSection(bool isDesktop) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionTitle(title: "Educational Guild Records"),
-        const SizedBox(height: 40),
-        const _TimelineNode(
+        _SectionTitle(title: "Educational Guild Records", isDesktop: isDesktop),
+        SizedBox(height: isDesktop ? 40 : 25),
+        _TimelineNode(
           year: "BSc in Computer Engineering",
           title: "Muğla Sıtkı Koçman University",
           subtitle: "Sep 2021 - Present(Expected date of graduation: June 2026)",
           description: "GPA : 3.46",
           isLast: false,
+          isDesktop: isDesktop,
         ),
       ],
     );
   }
 
-  Widget _buildApprenticeshipSection() {
+  Widget _buildApprenticeshipSection(bool isDesktop) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _SectionTitle(title: "Apprenticeship Records"),
-        const SizedBox(height: 40),
-        const _TimelineNode(
+        _SectionTitle(title: "Apprenticeship Records", isDesktop: isDesktop),
+        SizedBox(height: isDesktop ? 40 : 25),
+        _TimelineNode(
           year: "Artificial Intelligence Intern",
           title: "MAVA",
           subtitle: "Jun 2025 - Aug 2025 | Muğla, Turkey",
           description: "Developed a recommendation system by scraping data from a dynamic e-commerce platform and leveraging product categories for predictive modeling. Experimented with multiple approaches, including Logistic Regression with TF-IDF, LSTM, GRU, and fne-tuned BERTurk. Trained the models and containerized both the models and the OpenSearch database using Docker, resolving dependency issues and ensuring scalability. Designed and implemented an innovative web interface using HTML/CSS, and built a chatbot service powered by Gemini API and Flask, seamlessly integrated into the interface.",
           isLast: false,
+          isDesktop: isDesktop,
         ),
-        const _TimelineNode(
+        _TimelineNode(
           year: "Data Science Intern",
           title: "Virtus R&D Software Inc.",
           subtitle: "May 2024 - Oct 2024 | Muğla, Turkey",
           description: "Developed Python scripts for data collection, preprocessing, and structuring, leveraging mathematical approaches to clean and organize CSV fles. Worked on medical image processing using TensorFlow, focusing on deep learning-based analysis. Experienced in data mining, automation, and building effcient pipelines for data organization and analysis.",
           isLast: false,
+          isDesktop: isDesktop,
         ),
       ],
     );
@@ -412,7 +420,9 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
 
 class _SectionTitle extends StatelessWidget {
   final String title;
-  const _SectionTitle({required this.title});
+  final bool isDesktop;
+  
+  const _SectionTitle({required this.title, required this.isDesktop});
 
   @override
   Widget build(BuildContext context) {
@@ -421,11 +431,12 @@ class _SectionTitle extends StatelessWidget {
         children: [
           Text(
             title.toUpperCase(),
+            textAlign: TextAlign.center,
             style: GoogleFonts.cinzel(
-              fontSize: 40,
+              fontSize: isDesktop ? 40 : 26,
               fontWeight: FontWeight.bold,
               color: const Color(0xFFD4AF37),
-              letterSpacing: 3,
+              letterSpacing: isDesktop ? 3 : 1.5,
               shadows: [
                 Shadow(color: Colors.black.withOpacity(0.8), offset: const Offset(3, 3), blurRadius: 6),
               ],
@@ -434,10 +445,10 @@ class _SectionTitle extends StatelessWidget {
           const SizedBox(height: 10),
           Container(
             height: 2,
-            width: 100,
-            decoration: BoxDecoration(
+            width: isDesktop ? 100 : 70,
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.transparent, const Color(0xFFD4AF37), Colors.transparent],
+                colors: [Colors.transparent, Color(0xFFD4AF37), Colors.transparent],
               ),
             ),
           ),
@@ -450,8 +461,15 @@ class _SectionTitle extends StatelessWidget {
 class _SkillRune extends StatefulWidget {
   final String name;
   final double mastery;
+  final bool isDesktop;
+  final double width;
 
-  const _SkillRune({required this.name, required this.mastery});
+  const _SkillRune({
+    required this.name, 
+    required this.mastery, 
+    required this.isDesktop,
+    required this.width,
+  });
 
   @override
   State<_SkillRune> createState() => _SkillRuneState();
@@ -485,8 +503,8 @@ class _SkillRuneState extends State<_SkillRune> with SingleTickerProviderStateMi
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        width: 300,
-        padding: const EdgeInsets.all(20),
+        width: widget.width,
+        padding: EdgeInsets.all(widget.isDesktop ? 20 : 8),
         decoration: BoxDecoration(
           color: _isHovered ? const Color(0xFF1A1510) : Colors.black.withOpacity(0.5),
           border: Border.all(
@@ -500,20 +518,22 @@ class _SkillRuneState extends State<_SkillRune> with SingleTickerProviderStateMi
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               widget.name,
+              textAlign: TextAlign.center,
               style: GoogleFonts.almendra(
-                fontSize: 18,
+                fontSize: widget.isDesktop ? 18 : 11,
                 color: _isHovered ? Colors.white : Colors.white70,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: widget.isDesktop ? 15 : 10),
             Stack(
               children: [
                 Container(
-                  height: 4,
+                  height: widget.isDesktop ? 4 : 3,
                   width: double.infinity,
                   decoration: BoxDecoration(color: Colors.white.withOpacity(0.1), borderRadius: BorderRadius.circular(2)),
                 ),
@@ -523,7 +543,7 @@ class _SkillRuneState extends State<_SkillRune> with SingleTickerProviderStateMi
                     return FractionallySizedBox(
                       widthFactor: _fillAnimation.value,
                       child: Container(
-                        height: 4,
+                        height: widget.isDesktop ? 4 : 3,
                         decoration: BoxDecoration(
                           color: const Color(0xFFD4AF37),
                           borderRadius: BorderRadius.circular(2),
@@ -581,14 +601,14 @@ class _ProjectTome extends StatelessWidget {
             bottom: -20,
             child: Icon(
               Icons.menu_book_sharp, 
-              size: 200,
+              size: isDesktop ? 200 : 120,
               color: const Color(0xFFD4AF37).withOpacity(0.03), 
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 4.0),
             child: Padding(
-              padding: EdgeInsets.all(isDesktop ? 40.0 : 25.0),
+              padding: EdgeInsets.all(isDesktop ? 40.0 : 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -596,7 +616,7 @@ class _ProjectTome extends StatelessWidget {
                   Text(
                     title,
                     style: GoogleFonts.cinzel(
-                      fontSize: isDesktop ? 36 : 28,
+                      fontSize: isDesktop ? 36 : 22,
                       fontWeight: FontWeight.bold,
                       color: const Color(0xFFD4AF37),
                       shadows: const [
@@ -612,15 +632,15 @@ class _ProjectTome extends StatelessWidget {
                   Text(
                     role,
                     style: GoogleFonts.almendra(
-                      fontSize: 20,
+                      fontSize: isDesktop ? 20 : 16,
                       fontStyle: FontStyle.italic,
                       color: Colors.white54,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: isDesktop ? 20 : 15),
                   Container(
                     height: 1,
-                    width: 200,
+                    width: isDesktop ? 200 : 120,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -630,14 +650,14 @@ class _ProjectTome extends StatelessWidget {
                       ),
                     ),
                   ),             
-                  const SizedBox(height: 25),
+                  SizedBox(height: isDesktop ? 25 : 15),
                   Text(
                     description,
                     style: GoogleFonts.almendra(
-                      fontSize: 19,
+                      fontSize: isDesktop ? 19 : 15,
                       color: Colors.white70,
-                      height: 1.7,
-                      letterSpacing: 1.1,
+                      height: isDesktop ? 1.7 : 1.5,
+                      letterSpacing: isDesktop ? 1.1 : 1.0,
                     ),
                   ),
                 ],
@@ -674,6 +694,7 @@ class _TimelineNode extends StatelessWidget {
   final String subtitle;
   final String description;
   final bool isLast;
+  final bool isDesktop;
 
   const _TimelineNode({
     required this.year,
@@ -681,6 +702,7 @@ class _TimelineNode extends StatelessWidget {
     required this.subtitle,
     required this.description,
     required this.isLast,
+    required this.isDesktop,
   });
 
   @override
@@ -692,12 +714,12 @@ class _TimelineNode extends StatelessWidget {
           Column(
             children: [
               Container(
-                width: 20,
-                height: 20,
+                width: isDesktop ? 20 : 16,
+                height: isDesktop ? 20 : 16,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.black,
-                  border: Border.all(color: const Color(0xFFD4AF37), width: 3),
+                  border: Border.all(color: const Color(0xFFD4AF37), width: isDesktop ? 3 : 2),
                 ),
               ),
               if (!isLast)
@@ -715,20 +737,20 @@ class _TimelineNode extends StatelessWidget {
                 ),
             ],
           ),
-          const SizedBox(width: 30),
+          SizedBox(width: isDesktop ? 30 : 20),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 50.0),
+              padding: EdgeInsets.only(bottom: isDesktop ? 50.0 : 30.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(year, style: GoogleFonts.cinzel(fontSize: 20, color: const Color(0xFFD4AF37), fontWeight: FontWeight.bold)),
+                  Text(year, style: GoogleFonts.cinzel(fontSize: isDesktop ? 20 : 16, color: const Color(0xFFD4AF37), fontWeight: FontWeight.bold)),
                   const SizedBox(height: 5),
-                  Text(title, style: GoogleFonts.cinzel(fontSize: 24, color: Colors.white)),
+                  Text(title, style: GoogleFonts.cinzel(fontSize: isDesktop ? 24 : 18, color: Colors.white)),
                   const SizedBox(height: 5),
-                  Text(subtitle, style: GoogleFonts.almendra(fontSize: 18, color: Colors.white54, fontStyle: FontStyle.italic)),
-                  const SizedBox(height: 15),
-                  Text(description, style: GoogleFonts.almendra(fontSize: 18, color: Colors.white70, height: 1.5)),
+                  Text(subtitle, style: GoogleFonts.almendra(fontSize: isDesktop ? 18 : 14, color: Colors.white54, fontStyle: FontStyle.italic)),
+                  SizedBox(height: isDesktop ? 15 : 10),
+                  Text(description, style: GoogleFonts.almendra(fontSize: isDesktop ? 18 : 15, color: Colors.white70, height: isDesktop ? 1.5 : 1.4)),
                 ],
               ),
             ),
@@ -754,6 +776,9 @@ class _HoverButtonState extends State<_HoverButton> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isDesktop = size.width > 900;
+
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -761,7 +786,7 @@ class _HoverButtonState extends State<_HoverButton> {
         onTap: widget.onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+          padding: EdgeInsets.symmetric(horizontal: isDesktop ? 40 : 20, vertical: isDesktop ? 15 : 10),
           decoration: BoxDecoration(
             color: _isHovered ? const Color(0xFFD4AF37).withOpacity(0.1) : Colors.black.withOpacity(0.8),
             border: Border.all(color: const Color(0xFFD4AF37), width: _isHovered ? 2 : 1),
@@ -771,10 +796,10 @@ class _HoverButtonState extends State<_HoverButton> {
           child: Text(
             widget.text,
             style: GoogleFonts.cinzel(
-              fontSize: 22,
+              fontSize: isDesktop ? 22 : 16,
               color: _isHovered ? Colors.white : const Color(0xFFD4AF37),
               fontWeight: FontWeight.bold,
-              letterSpacing: 2,
+              letterSpacing: isDesktop ? 2 : 1,
             ),
           ),
         ),
@@ -788,8 +813,11 @@ class _OrnateDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isDesktop = size.width > 900;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 80.0),
+      padding: EdgeInsets.symmetric(vertical: isDesktop ? 80.0 : 40.0),
       child: CustomPaint(
         size: const Size(double.infinity, 40),
         painter: _DividerPainter(),
@@ -808,7 +836,6 @@ class _DividerPainter extends CustomPainter {
 
     final center = Offset(size.width / 2, size.height / 2);
     
-    // Middle Diamond
     final path = Path()
       ..moveTo(center.dx, center.dy - 10)
       ..lineTo(center.dx + 10, center.dy)
@@ -817,13 +844,10 @@ class _DividerPainter extends CustomPainter {
       ..close();
     canvas.drawPath(path, paint);
 
-    // Left Line
     canvas.drawLine(Offset(0, center.dy), Offset(center.dx - 20, center.dy), paint);
     
-    // Right Line
     canvas.drawLine(Offset(center.dx + 20, center.dy), Offset(size.width, center.dy), paint);
 
-    // End Dots
     final dotPaint = Paint()..color = const Color(0xFFD4AF37).withOpacity(0.8);
     canvas.drawCircle(Offset(10, center.dy), 3, dotPaint);
     canvas.drawCircle(Offset(size.width - 10, center.dy), 3, dotPaint);
