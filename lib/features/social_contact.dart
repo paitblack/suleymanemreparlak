@@ -64,27 +64,26 @@ class SocialContactStrip extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // CV Butonu Eklendi
             _SocialIconBtn(
-              icon: Icons.description_outlined,
+              iconWidget: const Icon(Icons.description_outlined),
               onTap: () => _launchUrl(_cvUrl),
               tooltip: 'View CV',
             ),
             const SizedBox(width: 25),
             _SocialIconBtn(
-              icon: FontAwesomeIcons.github,
+              iconWidget: const FaIcon(FontAwesomeIcons.github),
               onTap: () => _launchUrl(_githubUrl),
               tooltip: 'Visit GitHub Chronicle',
             ),
             const SizedBox(width: 25),
             _SocialIconBtn(
-              icon: FontAwesomeIcons.linkedinIn,
+              iconWidget: const FaIcon(FontAwesomeIcons.linkedinIn),
               onTap: () => _launchUrl(_linkedinUrl),
               tooltip: 'Connect on LinkedIn',
             ),
             const SizedBox(width: 25),
             _SocialIconBtn(
-              icon: Icons.email_outlined,
+              iconWidget: const Icon(Icons.email_outlined),
               onTap: SocialContactStrip.sendRavenEmail, 
               tooltip: 'Send a Raven',
             ),
@@ -96,12 +95,13 @@ class SocialContactStrip extends StatelessWidget {
 }
 
 class _SocialIconBtn extends StatefulWidget {
-  final IconData icon;
+  final Widget iconWidget;
   final VoidCallback onTap;
   final String tooltip;
 
   const _SocialIconBtn({
-    required this.icon,
+    super.key,
+    required this.iconWidget,
     required this.onTap,
     required this.tooltip,
   });
@@ -135,10 +135,12 @@ class _SocialIconBtnState extends State<_SocialIconBtn> {
               shape: BoxShape.circle,
               color: _isHovered ? const Color(0xFFD4AF37).withOpacity(0.1) : Colors.transparent,
             ),
-            child: FaIcon(
-              widget.icon,
-              size: 28,
-              color: _isHovered ? const Color(0xFFD4AF37) : Colors.white.withOpacity(0.8),
+            child: IconTheme(
+              data: IconThemeData(
+                size: 28,
+                color: _isHovered ? const Color(0xFFD4AF37) : Colors.white.withOpacity(0.8),
+              ),
+              child: widget.iconWidget,
             ),
           ),
         ),
