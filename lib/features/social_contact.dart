@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SocialContactStrip extends StatelessWidget {
   const SocialContactStrip({super.key});
+  static const String _cvUrl = "https://drive.google.com/file/d/1uRSFzrc6wihiP_jur35OMh4OiY3BwJuG/view?usp=sharing";
   static const String _githubUrl = 'https://github.com/paitblack';
   static const String _linkedinUrl = 'https://www.linkedin.com/in/süleyman-emre-parlak-a30374260';
   static const String _contactEmail = 'emre-parlak2002@hotmail.com';
@@ -63,6 +64,13 @@ class SocialContactStrip extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // CV Butonu Eklendi
+            _SocialIconBtn(
+              icon: Icons.description_outlined,
+              onTap: () => _launchUrl(_cvUrl),
+              tooltip: 'View CV',
+            ),
+            const SizedBox(width: 25),
             _SocialIconBtn(
               icon: FontAwesomeIcons.github,
               onTap: () => _launchUrl(_githubUrl),
