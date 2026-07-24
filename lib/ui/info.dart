@@ -207,7 +207,7 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
         ),
         SizedBox(height: isDesktop ? 30 : 20),
         Text(
-          "A fourth-year Computer Engineering student in Turkey with a strong passion for computer science and a deep enthusiasm for Artifcial Intelligence and its applications. Dedicated to exploring AI-driven solutions, machine learning, and data science, with a keen interest in developing innovative and effcient technologies.",
+          "Computer Engineering graduate specializing in Artifcial Intelligence, Machine Learning, and AI-driven software systems. Experienced in developing end-to-end solutions involving LLMs, RAG systems, voice assistants, and scalable backend architectures. Passionate about building intelligent technologies that solve real-world problems.",
           textAlign: TextAlign.center,
           style: GoogleFonts.almendra(
             fontSize: isDesktop ? 20 : 16,
@@ -382,8 +382,8 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
         _TimelineNode(
           year: "BSc in Computer Engineering",
           title: "Muğla Sıtkı Koçman University",
-          subtitle: "Sep 2021 - Present(Expected date of graduation: June 2026)",
-          description: "GPA : 3.46",
+          subtitle: "Sep 2021 - Jun 2026",
+          description: "GPA : 3.50",
           isLast: false,
           isDesktop: isDesktop,
         ),
@@ -397,6 +397,14 @@ class _ArchitectScreenState extends State<ArchitectScreen> with TickerProviderSt
       children: [
         _SectionTitle(title: "Apprenticeship Records", isDesktop: isDesktop),
         SizedBox(height: isDesktop ? 40 : 25),
+        _TimelineNode(
+          year: "Software Engineer Intern",
+          title: "Iceberg Digital",
+          subtitle: "Jun 2026 - Present | Essex, UK",
+          description: "Ongoing.",
+          isLast: false,
+          isDesktop: isDesktop,
+        ),
         _TimelineNode(
           year: "Artificial Intelligence Intern",
           title: "MAVA",
